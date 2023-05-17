@@ -11,8 +11,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MainPageCustomTopView : UIView
 
-@property(nonatomic, strong)UIButton *btn;
-@property(
 
 @end
 
