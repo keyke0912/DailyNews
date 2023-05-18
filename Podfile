@@ -6,6 +6,7 @@ target 'DailyNews' do
   use_frameworks!
   pod 'Masonry'
   pod 'AFNetworking'
+  pod 'SDWebImage'
   # Pods for DailyNews
 
 end

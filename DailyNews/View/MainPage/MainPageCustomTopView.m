@@ -43,10 +43,10 @@
         
         [self.dateLab mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.top.mas_equalTo(self.mas_top).mas_offset(5);
-            make.left.mas_equalTo(self.mas_left).mas_offset(15);  //将这里的mas_left省略后自动匹配make.left
+            make.top.mas_equalTo(self.mas_top).mas_offset(10);
+            make.left.mas_equalTo(self.mas_left).mas_offset(18);  //将这里的mas_left省略后自动匹配make.left
             make.width.mas_offset(30);
-            make.height.mas_offset(30);
+            make.height.mas_offset(20);
             
         }];
         
@@ -54,10 +54,10 @@
         
         [self.monthLab mas_makeConstraints:^(MASConstraintMaker *make) {
             
-            make.top.mas_equalTo(self.dateLab).mas_offset(28);
+            make.top.mas_equalTo(self.dateLab).mas_offset(20);
             make.centerX.mas_equalTo(self.dateLab).mas_offset(0);
             make.width.mas_equalTo(self.dateLab).mas_offset(10);
-            make.height.mas_equalTo(self.dateLab).mas_offset(-15);
+            make.height.mas_equalTo(self.dateLab).mas_offset(-5);
             
         }];
         
@@ -65,7 +65,7 @@
             
             make.top.mas_equalTo(self.dateLab).mas_offset(0);
             make.left.mas_equalTo(self.dateLab.mas_right).mas_offset(15);
-            make.height.mas_offset(15);
+            make.height.mas_offset(30);
             make.width.mas_offset(2);
             
         }];
@@ -108,7 +108,7 @@
         _dateLab.text = dateString;
         _dateLab.textColor = UIColor.blackColor;
         _dateLab.backgroundColor = UIColor.whiteColor;
-        _dateLab.font = [UIFont systemFontOfSize:24];
+        _dateLab.font = [UIFont systemFontOfSize:21];
         _dateLab.textAlignment = NSTextAlignmentCenter; //中心对齐
 
         
@@ -119,6 +119,7 @@
 -(UILabel *)monthLab {
     if (_monthLab == nil) {
         //这要进行改动，看看能不能和datelab合起来
+        _monthLab = [[UILabel alloc] init];
         NSArray *monthArray = @[@"一月", @"二月", @"三月", @"四月", @"五月", @"六月", @"七月", @"八月", @"九月", @"十月", @"十一月", @"十二月"];
         NSDate *date = [NSDate date];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -136,6 +137,7 @@
 
 -(UIView *)segmentationView {
     if (_segmentationView == nil) {
+        _segmentationView = [[UIView alloc] init];
         _segmentationView.backgroundColor = [UIColor blackColor];
     }
     return _segmentationView;

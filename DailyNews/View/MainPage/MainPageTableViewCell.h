@@ -11,7 +11,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MainPageTableViewCell : UITableViewCell
 
+//这里由于要通过controller进行model与view的通信，需要将控件设置的string暴露在h文件里
 
+@property (nonatomic, copy) NSString *titleStr;
+@property (nonatomic, copy) NSString *hintStr;
+@property (nonatomic, copy) NSString *imageStr;
 
 @end
 

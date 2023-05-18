@@ -12,6 +12,10 @@
 + (instancetype)DataWithDict:(NSDictionary *)dict {
     Model *model = [[Model alloc] init];
     model.title = dict[@"title"];
+    model.image = dict[@"images"];
+    model.url = dict[@"url"];
+    model.hint = dict[@"hint"];
+    model.messageId = dict[@"id"];
     return model;
 }
 + (void)getDataWithSuccess:(void (^)(NSArray * _Nonnull))success Failure:(void (^)(void))failure{
