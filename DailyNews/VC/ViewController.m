@@ -9,6 +9,8 @@
 #import "Model.h"
 #import "MainPageCustomTopView.h"
 #import "Masonry.h"
+#import "MainPageTableViewCell.h"
+#import "UIImageView+WebCache.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -61,13 +63,25 @@
     return self.array.count;
 }
 
+//设置足够的tableview行高之后才能显现出image
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 100;
+}
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    MainPageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        cell = [[MainPageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
     Model *model = self.array[indexPath.row];
-    cell.textLabel.text = model.title;
+//    cell.titleStr = model.title;
+//    //cell.imageStr = model.image;
+//    cell.hintStr = model.hint;
+    cell.title.text = model.title;
+    cell.hint.text = model.hint;
+    [cell.image sd_setImageWithURL:[NSURL URLWithString:[model.image objectAtIndex:0]]];
+    
     return cell;
 }
 

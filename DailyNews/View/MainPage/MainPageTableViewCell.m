@@ -11,9 +11,6 @@
 
 @interface MainPageTableViewCell()
 
-@property (nonatomic, strong) UILabel *title;
-@property (nonatomic, strong) UILabel *hint;
-@property (nonatomic, strong) UIImageView *image;
 
 
 @end
@@ -63,7 +60,8 @@
         _title = [[UILabel alloc] init];
         _title.numberOfLines = 2;
         _title.font = [UIFont boldSystemFontOfSize:16];
-        _title.text = _titleStr;
+        //_title.backgroundColor = [UIColor blueColor];
+        //_title.text = _titleStr;
         
     }
     return _title;
@@ -75,7 +73,8 @@
         _hint = [[UILabel alloc] init];
         _hint.font = [UIFont systemFontOfSize:12];
         _hint.textColor = UIColor.grayColor;
-        _hint.text = _hintStr;
+        //_hint.backgroundColor = [UIColor greenColor];
+        //_hint.text = _hintStr;
         
     }
     return _hint;
@@ -87,7 +86,8 @@
         _image = [[UIImageView alloc] init];
         _image.layer.cornerRadius = 4;
         _image.clipsToBounds = YES;
-        [_image sd_setImageWithURL:[NSURL URLWithString:_imageStr]];
+        //[_image sd_setImageWithURL:[NSURL URLWithString:_imageStr]];
+        
         
     }
     return _image;
