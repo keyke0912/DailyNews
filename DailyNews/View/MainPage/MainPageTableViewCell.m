@@ -61,7 +61,7 @@
     if (_title == nil) {
         
         _title = [[UILabel alloc] init];
-        _title.numberOfLines = 3;
+        _title.numberOfLines = 2;
         _title.font = [UIFont boldSystemFontOfSize:16];
         _title.text = _titleStr;
         
