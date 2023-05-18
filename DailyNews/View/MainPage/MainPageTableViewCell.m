@@ -58,7 +58,7 @@
 #pragma mark-Lazy
 
 - (UILabel *)title {
-    if (_title != nil) {
+    if (_title == nil) {
         
         _title = [[UILabel alloc] init];
         _title.numberOfLines = 2;
@@ -70,7 +70,7 @@
 }
 
 - (UILabel *) hint {
-    if (_hint != nil) {
+    if (_hint == nil) {
         
         _hint = [[UILabel alloc] init];
         _hint.font = [UIFont systemFontOfSize:12];
@@ -82,7 +82,7 @@
 }
 
 - (UIImageView *) image {
-    if (_image != nil) {
+    if (_image == nil) {
         
         _image = [[UIImageView alloc] init];
         _image.layer.cornerRadius = 4;
