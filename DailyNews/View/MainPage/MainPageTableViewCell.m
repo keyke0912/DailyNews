@@ -23,28 +23,28 @@
     
     if (self) {
         
-        [self.contentView addSubview:self.title];
-        [self.contentView addSubview:self.hint];
-        [self.contentView addSubview:self.image];
+        [self.contentView addSubview:self.tableTitleLab];
+        [self.contentView addSubview:self.tableHintLab];
+        [self.contentView addSubview:self.tableImageView];
         
-        [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.tableTitleLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.contentView).mas_offset(25);
             make.left.mas_equalTo(self.contentView).mas_offset(10);
             make.width.mas_equalTo(self.contentView).mas_offset(-100);
             
         }];
         
-        [self.image mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.tableImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.mas_equalTo(self.contentView.mas_centerY).mas_offset(0);
-            make.left.mas_equalTo(self.title.mas_right).mas_offset(2);
+            make.left.mas_equalTo(self.tableTitleLab.mas_right).mas_offset(2);
             make.width.mas_equalTo(self.contentView.mas_height).mas_offset(-40);
             make.height.mas_equalTo(self.contentView).mas_offset(-40);
         }];
         
-        [self.hint mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.title.mas_bottom).mas_offset(0);
-            make.left.mas_equalTo(self.title).mas_offset(0);
-            make.width.mas_equalTo(self.title).mas_offset(0);
+        [self.tableHintLab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.tableTitleLab.mas_bottom).mas_offset(0);
+            make.left.mas_equalTo(self.tableTitleLab).mas_offset(0);
+            make.width.mas_equalTo(self.tableTitleLab).mas_offset(0);
             make.height.mas_offset(20);
         }];
 
@@ -54,43 +54,43 @@
 
 #pragma mark-Lazy
 
-- (UILabel *)title {
-    if (_title == nil) {
+- (UILabel *)tableTitleLab {
+    if (_tableTitleLab == nil) {
         
-        _title = [[UILabel alloc] init];
-        _title.numberOfLines = 2;
-        _title.font = [UIFont boldSystemFontOfSize:16];
+        _tableTitleLab = [[UILabel alloc] init];
+        _tableTitleLab.numberOfLines = 2;
+        _tableTitleLab.font = [UIFont boldSystemFontOfSize:16];
         //_title.backgroundColor = [UIColor blueColor];
         //_title.text = _titleStr;
         
     }
-    return _title;
+    return _tableTitleLab;
 }
 
-- (UILabel *) hint {
-    if (_hint == nil) {
+- (UILabel *) tableHintLab {
+    if (_tableHintLab == nil) {
         
-        _hint = [[UILabel alloc] init];
-        _hint.font = [UIFont systemFontOfSize:12];
-        _hint.textColor = UIColor.grayColor;
+        _tableHintLab = [[UILabel alloc] init];
+        _tableHintLab.font = [UIFont systemFontOfSize:12];
+        _tableHintLab.textColor = UIColor.grayColor;
         //_hint.backgroundColor = [UIColor greenColor];
         //_hint.text = _hintStr;
         
     }
-    return _hint;
+    return _tableHintLab;
 }
 
-- (UIImageView *) image {
-    if (_image == nil) {
+- (UIImageView *) tableImageView {
+    if (_tableImageView == nil) {
         
-        _image = [[UIImageView alloc] init];
-        _image.layer.cornerRadius = 4;
-        _image.clipsToBounds = YES;
+        _tableImageView = [[UIImageView alloc] init];
+        _tableImageView.layer.cornerRadius = 4;
+        _tableImageView.clipsToBounds = YES;
         //[_image sd_setImageWithURL:[NSURL URLWithString:_imageStr]];
         
         
     }
-    return _image;
+    return _tableImageView;
 }
 
 @end

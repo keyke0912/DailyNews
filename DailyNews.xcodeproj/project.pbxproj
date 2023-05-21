@@ -17,6 +17,7 @@
 		AF6B692E29F225220097B271 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = AF6B692D29F225220097B271 /* Model.m */; };
 		AFA686E729F8127800AEDFF4 /* MainPageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA686E629F8127800AEDFF4 /* MainPageTableViewCell.m */; };
 		AFA686EE29F8155F00AEDFF4 /* MainPageCustomTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA686ED29F8155F00AEDFF4 /* MainPageCustomTopView.m */; };
+		AFBC08682A17F85B00AFC4DE /* BannerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBC08672A17F85B00AFC4DE /* BannerCollectionViewCell.m */; };
 		DF399760779C2E890667B995 /* Pods_DailyNews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62E684AE8E18A3719819515E /* Pods_DailyNews.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,8 @@
 		AFA686E629F8127800AEDFF4 /* MainPageTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainPageTableViewCell.m; sourceTree = "<group>"; };
 		AFA686EC29F8155F00AEDFF4 /* MainPageCustomTopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainPageCustomTopView.h; sourceTree = "<group>"; };
 		AFA686ED29F8155F00AEDFF4 /* MainPageCustomTopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainPageCustomTopView.m; sourceTree = "<group>"; };
+		AFBC08662A17F85B00AFC4DE /* BannerCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BannerCollectionViewCell.h; sourceTree = "<group>"; };
+		AFBC08672A17F85B00AFC4DE /* BannerCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BannerCollectionViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +142,8 @@
 		AFA686E829F8137900AEDFF4 /* MainPage */ = {
 			isa = PBXGroup;
 			children = (
+				AFBC08662A17F85B00AFC4DE /* BannerCollectionViewCell.h */,
+				AFBC08672A17F85B00AFC4DE /* BannerCollectionViewCell.m */,
 				AFA686E529F8127800AEDFF4 /* MainPageTableViewCell.h */,
 				AFA686E629F8127800AEDFF4 /* MainPageTableViewCell.m */,
 				AFA686EC29F8155F00AEDFF4 /* MainPageCustomTopView.h */,
@@ -263,6 +268,7 @@
 			files = (
 				AF6B691B29F216780097B271 /* ViewController.m in Sources */,
 				AF6B691529F216780097B271 /* AppDelegate.m in Sources */,
+				AFBC08682A17F85B00AFC4DE /* BannerCollectionViewCell.m in Sources */,
 				AFA686EE29F8155F00AEDFF4 /* MainPageCustomTopView.m in Sources */,
 				AF6B692629F2167A0097B271 /* main.m in Sources */,
 				AFA686E729F8127800AEDFF4 /* MainPageTableViewCell.m in Sources */,

@@ -18,9 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 //@property (nonatomic, copy) NSString *hintStr;
 //@property (nonatomic, copy) NSString *imageStr;
 
-@property (nonatomic, strong) UILabel *title;
-@property (nonatomic, strong) UILabel *hint;
-@property (nonatomic, strong) UIImageView *image;
+@property (nonatomic, strong) UILabel *tableTitleLab;
+@property (nonatomic, strong) UILabel *tableHintLab;
+@property (nonatomic, strong) UIImageView *tableImageView;
 
 
 @end
