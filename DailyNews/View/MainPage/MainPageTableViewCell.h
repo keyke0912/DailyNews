@@ -9,6 +9,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+UIKIT_EXTERN NSString *MainPageTableViewCellReuseIdentifier;
+
 @interface MainPageTableViewCell : UITableViewCell
 
 //这里由于要通过controller进行model与view的通信，需要将控件设置的string暴露在h文件里

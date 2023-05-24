@@ -28,25 +28,51 @@
     return modelWithBanner;
 }
 
-+ (void)getDataWithSuccess:(void (^)(NSArray * _Nonnull, NSArray * _Nonnull))success Failure:(void (^)(void))failure{
++ (void)getDataWithSuccess:(void (^)(NSArray * _Nonnull, NSArray * _Nonnull))success Failure:(void (^)(void))failure Url:(NSString *)url{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager GET:@"https://news-at.zhihu.com/api/3/news/latest" parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject ){
+    [manager GET:url parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject ){
         
         NSMutableArray *mArrayWithTableView = [NSMutableArray array];
         NSMutableArray *mArrayWithBanner = [NSMutableArray array];
         
+        Model *model;
+        
         for (NSDictionary *dict in responseObject[@"stories"]) {
-            Model *model = [Model DataWithDictInTableView:dict];//临时model
+            model = [Model DataWithDictInTableView:dict];//临时model
+            model.dateStr = responseObject[@"date"];
             [mArrayWithTableView addObject:model];
         }
         for (NSDictionary *dict in responseObject[@"top_stories"]) {
-            Model *model = [Model DataWithDictInBanner:dict];
+            model = [Model DataWithDictInBanner:dict];
+            model.dateStr = responseObject[@"date"];
             [mArrayWithBanner addObject:model];
         }
+        
         if (success) success(mArrayWithTableView.copy, mArrayWithBanner.copy);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        }];
+        } ];
+    
+}
+
++ (void)getMoreDataWithSuccess:(void (^)(NSArray * _Nonnull))success Failure:(void (^)(void))failure Url:(NSString *)url {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager GET:url parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject ) {
+        
+        NSMutableArray *mArrayWithMore = [NSMutableArray array];
+        Model *model;
+        
+        for (NSDictionary *dict in responseObject[@"stories"]) {
+            model = [Model DataWithDictInTableView:dict];
+            model.dateStr = responseObject[@"date"];
+            [mArrayWithMore addObject:model];
+            
+        } if (success) success(mArrayWithMore.copy);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"failure11");
+    }
+];
+    
 }
 
 @end

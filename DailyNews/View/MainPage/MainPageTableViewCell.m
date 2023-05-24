@@ -9,6 +9,8 @@
 #import "Masonry.h"
 #import "UIImageView+WebCache.h"
 
+NSString *MainPageTableViewCellReuseIdentifier = @"MainPageTableViewCell";
+
 @interface MainPageTableViewCell()
 
 

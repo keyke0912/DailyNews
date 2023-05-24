@@ -18,6 +18,8 @@
 		AFA686E729F8127800AEDFF4 /* MainPageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA686E629F8127800AEDFF4 /* MainPageTableViewCell.m */; };
 		AFA686EE29F8155F00AEDFF4 /* MainPageCustomTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA686ED29F8155F00AEDFF4 /* MainPageCustomTopView.m */; };
 		AFBC08682A17F85B00AFC4DE /* BannerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBC08672A17F85B00AFC4DE /* BannerCollectionViewCell.m */; };
+		AFBC086B2A1CF02F00AFC4DE /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBC086A2A1CF02F00AFC4DE /* HeaderView.m */; };
+		AFBC086E2A1D254000AFC4DE /* BannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBC086D2A1D254000AFC4DE /* BannerView.m */; };
 		DF399760779C2E890667B995 /* Pods_DailyNews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62E684AE8E18A3719819515E /* Pods_DailyNews.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +47,10 @@
 		AFA686ED29F8155F00AEDFF4 /* MainPageCustomTopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainPageCustomTopView.m; sourceTree = "<group>"; };
 		AFBC08662A17F85B00AFC4DE /* BannerCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BannerCollectionViewCell.h; sourceTree = "<group>"; };
 		AFBC08672A17F85B00AFC4DE /* BannerCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BannerCollectionViewCell.m; sourceTree = "<group>"; };
+		AFBC08692A1CF02F00AFC4DE /* HeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
+		AFBC086A2A1CF02F00AFC4DE /* HeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
+		AFBC086C2A1D254000AFC4DE /* BannerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BannerView.h; sourceTree = "<group>"; };
+		AFBC086D2A1D254000AFC4DE /* BannerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BannerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +154,10 @@
 				AFA686E629F8127800AEDFF4 /* MainPageTableViewCell.m */,
 				AFA686EC29F8155F00AEDFF4 /* MainPageCustomTopView.h */,
 				AFA686ED29F8155F00AEDFF4 /* MainPageCustomTopView.m */,
+				AFBC08692A1CF02F00AFC4DE /* HeaderView.h */,
+				AFBC086A2A1CF02F00AFC4DE /* HeaderView.m */,
+				AFBC086C2A1D254000AFC4DE /* BannerView.h */,
+				AFBC086D2A1D254000AFC4DE /* BannerView.m */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -267,12 +277,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF6B691B29F216780097B271 /* ViewController.m in Sources */,
+				AFBC086B2A1CF02F00AFC4DE /* HeaderView.m in Sources */,
 				AF6B691529F216780097B271 /* AppDelegate.m in Sources */,
 				AFBC08682A17F85B00AFC4DE /* BannerCollectionViewCell.m in Sources */,
 				AFA686EE29F8155F00AEDFF4 /* MainPageCustomTopView.m in Sources */,
 				AF6B692629F2167A0097B271 /* main.m in Sources */,
 				AFA686E729F8127800AEDFF4 /* MainPageTableViewCell.m in Sources */,
 				AF6B691829F216780097B271 /* SceneDelegate.m in Sources */,
+				AFBC086E2A1D254000AFC4DE /* BannerView.m in Sources */,
 				AF6B692E29F225220097B271 /* Model.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

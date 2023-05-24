@@ -22,7 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 ///请求数据
 + (void)getDataWithSuccess:(void(^)(NSArray * _Nonnull, NSArray * _Nonnull))success
-                   Failure:(void (^)(void)) failure;
+                   Failure:(void (^)(void)) failure
+                   Url:(NSString *) url;
++ (void)getMoreDataWithSuccess:(void (^)(NSArray * _Nonnull))success Failure:(void (^)(void))failure Url:(NSString *)url;
 ///请求数据后返回模型
 + (instancetype)DataWithDictInTableView:(NSDictionary *)dict;
 
