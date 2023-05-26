@@ -12,10 +12,6 @@ NSString *HeaderViewReuseIdentifier = @"HeaderView";
 @interface HeaderView ()
 
 
-@property (nonatomic, strong) UILabel *dateLab;
-@property (nonatomic, strong) UIView *dividingLine;
-
-
 @end
 
 @implementation HeaderView
@@ -34,16 +30,16 @@ NSString *HeaderViewReuseIdentifier = @"HeaderView";
 
 - (UILabel *) dateLab {
     if (_dateLab == nil) {
-        _dateLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
-        _dateLab.text = @"666";
-        _dateLab.font = [UIFont boldSystemFontOfSize:23];
+        _dateLab = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 100, 20)];
+        _dateLab.font = [UIFont boldSystemFontOfSize:13];
+        _dateLab.textColor = [UIColor grayColor];
     }
     return _dateLab;
 }
 
 - (UIView *) dividingLine {
     if (_dividingLine == nil) {
-        _dividingLine = [[UIView alloc] initWithFrame:CGRectMake(100, 10, 200, 1)];
+        _dividingLine = [[UIView alloc] initWithFrame:CGRectMake(80, 10, 300, 0.5)];
         _dividingLine.backgroundColor = [UIColor grayColor];
     }
     return _dividingLine;

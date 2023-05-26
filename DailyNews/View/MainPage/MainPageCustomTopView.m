@@ -108,7 +108,7 @@
         _dateLab.text = dateString;
         _dateLab.textColor = UIColor.blackColor;
         _dateLab.backgroundColor = UIColor.whiteColor;
-        _dateLab.font = [UIFont systemFontOfSize:21];
+        _dateLab.font = [UIFont boldSystemFontOfSize:21];
         _dateLab.textAlignment = NSTextAlignmentCenter; //中心对齐
 
         
@@ -124,7 +124,7 @@
         NSDate *date = [NSDate date];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"M"];
-        NSString *dateString = monthArray[[[dateFormatter stringFromDate:date] intValue]];
+        NSString *dateString = monthArray[[[dateFormatter stringFromDate:date] intValue] - 1];
         _monthLab.text = dateString;
         _monthLab.textColor = UIColor.blackColor;
         _monthLab.backgroundColor = UIColor.whiteColor;
@@ -138,7 +138,7 @@
 -(UIView *)segmentationView {
     if (_segmentationView == nil) {
         _segmentationView = [[UIView alloc] init];
-        _segmentationView.backgroundColor = [UIColor blackColor];
+        _segmentationView.backgroundColor = [UIColor grayColor];
     }
     return _segmentationView;
 }

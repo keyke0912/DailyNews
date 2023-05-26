@@ -26,7 +26,7 @@
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, copy) NSArray *tableViewDataArray;
-@property (nonatomic, copy) NSArray *bannerDataArray;
+@property (nonatomic, strong) NSMutableArray *bannerDataArray;
 @property (nonatomic, strong) NSMutableArray<NSArray *> *moreDataArray;
 @property (nonatomic, copy) NSString *pastNewsUrlStr;
 @property (nonatomic, copy) NSString *firstUrlStr;
@@ -34,6 +34,8 @@
 @property (nonatomic, strong) MainPageCustomTopView *topView;
 @property (nonatomic, strong) HeaderView *headerView;
 @property (nonatomic, strong) BannerView *bannerView;
+@property (nonatomic, strong) NSTimer *bannerTimer;
+@property (nonatomic, assign) NSInteger currentPageIndex;
 
 
 @end
@@ -58,17 +60,11 @@
     [Model getDataWithSuccess:^(NSArray * _Nonnull arrayWithTableView, NSArray * _Nonnull arrayWithBanner) {
         
         
-        self.bannerDataArray = arrayWithBanner;
-        NSLog(@"%@", arrayWithBanner);
-//        [self.view addSubview:self.bannerView.bannerCollectionView];
-//        [self.bannerView.bannerCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//            make.top.mas_equalTo(self.topView.mas_bottom).mas_offset(0); //参数设置为topview的高度可以实现紧贴
-//            make.left.mas_equalTo(self.view).mas_offset(0);
-//            make.width.mas_equalTo(self.view).mas_offset(0);
-//            make.height.mas_equalTo(self.view.mas_width).mas_offset(0);
-//
-//        }];
+        self.bannerDataArray = [arrayWithBanner mutableCopy];
+        [self.bannerDataArray addObject:arrayWithBanner[0]];
+        
+        NSLog(@"arrayWithBanner%@", arrayWithBanner);
+        NSLog(@"bannerDataArray%@", self.bannerDataArray);
         
         self.tableViewDataArray = arrayWithTableView;
         [self.moreDataArray addObject:self.tableViewDataArray];
@@ -121,14 +117,23 @@
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if (section == 0) {
         NSLog(@"bannerView请求");
-        return self.bannerView;
+        UIView *view = self.bannerView;
+//        [self startTimer];
+        return view;
     } else {
         NSLog(@"其他header请求");
-    HeaderView *nomalHeaderView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:HeaderViewReuseIdentifier];
-    if (nomalHeaderView == nil) {
+        
+        HeaderView *nomalHeaderView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:HeaderViewReuseIdentifier];
+        if (nomalHeaderView == nil) {
         nomalHeaderView = [[HeaderView alloc] initWithReuseIdentifier:HeaderViewReuseIdentifier];
-    }
-    return nomalHeaderView;
+        }
+        
+        Model *dateModel = self.moreDataArray[section][0];
+        NSString *month = [dateModel.dateStr substringWithRange:NSMakeRange(4, 2)];
+        NSString *date = [dateModel.dateStr substringWithRange:NSMakeRange(6, 2)];
+        nomalHeaderView.dateLab.text= [NSString stringWithFormat:@"%ld月%ld日",[month integerValue],[date integerValue]];
+        
+        return nomalHeaderView;
    }
 }
 
@@ -168,7 +173,7 @@
 #pragma mark - <UICollectionViewDelegate>
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 5;
+    return self.bannerDataArray.count;
 }
 
 #pragma mark - <UICollectionViewDelegateFlowLayout>
@@ -212,11 +217,11 @@
     if (_bannerView == nil) {
         CGFloat width = self.view.frame.size.width;
         NSLog(@"3333333333333    %f", width);
-        _bannerView = [[BannerView alloc] initWithFrame:CGRectMake(0, 0, width, width)];
+        _bannerView = [[BannerView alloc] initWithFrame:CGRectMake(0, 0, width, 393)];
         _bannerView.bannerCollectionView.delegate = self;
         _bannerView.bannerCollectionView.dataSource = self;
-        
-        
+        [self startTimer];
+        self.currentPageIndex = 0;
         
     }
     return _bannerView;
@@ -231,27 +236,67 @@
 }
 
 
-#pragma mark - ScrollViewDelegate
+#pragma mark - <ScrollViewDelegate>
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-//    CGFloat contentYoffset = scrollView.contentOffset.y;
-//    NSLog(@"内容-偏移量:%f table高度:%f",scrollView.contentSize.height-contentYoffset,self.tableView.frame.size.height);
-//    if(self.tableView.frame.size.height == 0 ||scrollView.contentSize.height-contentYoffset<700) return;
-//    if(self.isLoading == YES) return;
-//    if (scrollView.contentSize.height-contentYoffset- 200<= self.tableView.frame.size.height) {
-//        [self loadMoreData];
-//        NSLog(@"loadMore success\n\n\n\n\n\n\n\n\n\n");
-//        self.isLoading = YES;
-//    }
-//
-    CGFloat offsetY = scrollView.contentOffset.y;
+    if (scrollView == self.bannerView.bannerCollectionView) {
+            // 处理轮播图的滚动事件
+        //NSLog(@"bannerViewScoll");
+    } else if (scrollView == self.tableView) {
+        // 处理表格视图的滚动事件
+        NSLog(@"tableViewScoll");
+        CGFloat offsetY = scrollView.contentOffset.y;
         CGFloat contentHeight = scrollView.contentSize.height;
         CGFloat screenHeight = scrollView.frame.size.height;
-        
+                
         if (offsetY > contentHeight - screenHeight - 200) {
-            // 判断滚动到底部
+                // 判断滚动到底部
             [self loadMoreData];
             NSLog(@"加载方法调用成功");
         }
+    }
+    
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    if (scrollView == self.bannerView.bannerCollectionView) {
+            // 处理轮播图的滚动事件
+        NSLog(@"scroll------BeginDragging");
+        [self stopTimer];
+        NSInteger currentIndex = self.currentPageIndex;
+
+        // 计算下一个要显示的索引
+        NSInteger nextIndex = currentIndex + 1;
+        if (nextIndex >= self.bannerDataArray.count) {
+            nextIndex = 0;
+            NSIndexPath *firstIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+            [self.bannerView.bannerCollectionView scrollToItemAtIndexPath:firstIndexPath atScrollPosition:UICollectionViewScrollPositionLeft animated:NO];
+                        
+        }
+
+        // 更新当前显示的索引
+        self.currentPageIndex = nextIndex;
+
+        // 更新页面控件的当前页
+        self.bannerView.bannerPageControl.currentPage = nextIndex;
+    } else if (scrollView == self.tableView) {
+            // 处理表格视图的滚动事件
+        NSLog(@"table------BeginDragging");
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (scrollView == self.bannerView.bannerCollectionView) {
+            // 处理轮播图的滚动事件
+        ///[self startTimer];
+        ///这样设置的话会有连续两下滑动的特别快，解决方法就是，添加一个判断；
+        if (_bannerTimer == nil)  {
+            [self startTimer];
+        }
+        NSLog(@"scroll------EndDragging");
+    } else if (scrollView == self.tableView) {
+            // 处理表格视图的滚动事件
+        NSLog(@"table------EndDragging");
+    }
 }
 
 -(void)loadMoreData {
@@ -275,6 +320,59 @@
     
    
 }
+
+#pragma mark --Timer
+
+- (void)startTimer {
+    // 启动定时器
+    NSLog(@"startTimer");
+    self.bannerTimer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(scrollToNextPage) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:self.bannerTimer forMode:NSRunLoopCommonModes];
+}
+
+- (void)stopTimer {
+    // 停止定时器
+    NSLog(@"endTimer");
+    [self.bannerTimer invalidate];
+    self.bannerTimer = nil;
+}
+
+///在第六张图片加载后，停止timer直接无动画加载第一张实现衔接
+///索引小点点，要在第六张加载时切换到一个点
+///
+- (void)scrollToNextPage {
+    if (_bannerTimer != nil) {
+        NSLog(@"成功调用方法scrollToNextPage");
+        // 获取当前显示的索引
+        NSInteger currentIndex = self.currentPageIndex;
+
+        // 计算下一个要显示的索引
+        NSInteger nextIndex = currentIndex + 1;
+        NSLog(@"55555555555%ld", (long)nextIndex);
+        if (nextIndex >= self.bannerDataArray.count) {
+            nextIndex = 0;
+        }
+
+        // 更新当前显示的索引
+        self.currentPageIndex = nextIndex;
+
+        if (nextIndex == 0) {
+            [self stopTimer];
+            NSIndexPath *firstIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+            [self.bannerView.bannerCollectionView scrollToItemAtIndexPath:firstIndexPath atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+            [self startTimer];
+        } else {
+            NSIndexPath *nextIndexPath = [NSIndexPath indexPathForItem:nextIndex inSection:0];
+            
+            [self.bannerView.bannerCollectionView scrollToItemAtIndexPath:nextIndexPath atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
+
+        }
+        
+        self.bannerView.bannerPageControl.currentPage = nextIndex;
+
+    }
+}
+
 
 
 

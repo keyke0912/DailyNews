@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BannerView : UITableViewHeaderFooterView
 
 @property (nonatomic, strong) UICollectionView *bannerCollectionView;
+@property (nonatomic, strong) UIPageControl *bannerPageControl;
 
 @end
 

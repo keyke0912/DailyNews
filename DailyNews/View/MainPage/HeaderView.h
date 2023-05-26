@@ -13,6 +13,10 @@ UIKIT_EXTERN NSString *HeaderViewReuseIdentifier;
 
 @interface HeaderView : UITableViewHeaderFooterView
 
+@property (nonatomic, strong) UILabel *dateLab;
+@property (nonatomic, strong) UIView *dividingLine;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

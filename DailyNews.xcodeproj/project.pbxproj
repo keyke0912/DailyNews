@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		AF6B691529F216780097B271 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF6B691429F216780097B271 /* AppDelegate.m */; };
 		AF6B691829F216780097B271 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF6B691729F216780097B271 /* SceneDelegate.m */; };
-		AF6B691B29F216780097B271 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF6B691A29F216780097B271 /* ViewController.m */; };
+		AF6B691B29F216780097B271 /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF6B691A29F216780097B271 /* MainPageViewController.m */; };
 		AF6B691E29F216780097B271 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF6B691C29F216780097B271 /* Main.storyboard */; };
 		AF6B692029F2167A0097B271 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF6B691F29F2167A0097B271 /* Assets.xcassets */; };
 		AF6B692329F2167A0097B271 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF6B692129F2167A0097B271 /* LaunchScreen.storyboard */; };
@@ -32,8 +32,7 @@
 		AF6B691429F216780097B271 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		AF6B691629F216780097B271 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		AF6B691729F216780097B271 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		AF6B691929F216780097B271 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		AF6B691A29F216780097B271 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		AF6B691A29F216780097B271 /* MainPageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainPageViewController.m; sourceTree = "<group>"; };
 		AF6B691D29F216780097B271 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AF6B691F29F2167A0097B271 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF6B692229F2167A0097B271 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +50,7 @@
 		AFBC086A2A1CF02F00AFC4DE /* HeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
 		AFBC086C2A1D254000AFC4DE /* BannerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BannerView.h; sourceTree = "<group>"; };
 		AFBC086D2A1D254000AFC4DE /* BannerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BannerView.m; sourceTree = "<group>"; };
+		AFBC08702A2083F500AFC4DE /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,8 +131,8 @@
 		AFA686E329F811B300AEDFF4 /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				AF6B691929F216780097B271 /* ViewController.h */,
-				AF6B691A29F216780097B271 /* ViewController.m */,
+				AFBC08702A2083F500AFC4DE /* ViewController.h */,
+				AF6B691A29F216780097B271 /* MainPageViewController.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -276,7 +276,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF6B691B29F216780097B271 /* ViewController.m in Sources */,
+				AF6B691B29F216780097B271 /* MainPageViewController.m in Sources */,
 				AFBC086B2A1CF02F00AFC4DE /* HeaderView.m in Sources */,
 				AF6B691529F216780097B271 /* AppDelegate.m in Sources */,
 				AFBC08682A17F85B00AFC4DE /* BannerCollectionViewCell.m in Sources */,

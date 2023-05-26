@@ -13,7 +13,6 @@
 
 @interface BannerView ()
 
-
 @end
 
 @implementation BannerView
@@ -38,9 +37,18 @@
             make.width.mas_equalTo(self).mas_offset(0);
             make.height.mas_equalTo(self).mas_offset(0);
         }];
+        
+        [self addSubview:self.bannerPageControl];
+        [self.bannerPageControl mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self).mas_offset(300);
+            make.left.mas_equalTo(self).mas_offset(220);
+            make.width.mas_offset(200);
+            make.height.mas_offset(100);
+        }];
     }
     return self;
 }
+
 
 
 #pragma mark -Lazy
@@ -52,5 +60,18 @@
         
     }
     return _bannerCollectionView;
+}
+
+- (UIPageControl *) bannerPageControl {
+    if (_bannerPageControl == nil) {
+        self.bannerPageControl = [[UIPageControl alloc] init];
+        // 设置页面控件的属性
+        self.bannerPageControl.pageIndicatorTintColor = [UIColor grayColor];
+        self.bannerPageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
+        self.bannerPageControl.translatesAutoresizingMaskIntoConstraints = NO;
+        self.bannerPageControl.numberOfPages = 5; // 设置总页数
+        self.bannerPageControl.currentPage = 0; // 设置当前页为第一页
+    }
+    return _bannerPageControl;
 }
 @end
