@@ -25,6 +25,7 @@
     modelWithBanner.imageStr = dict[@"image"];
     modelWithBanner.urlStr = dict[@"url"];
     modelWithBanner.hintStr = dict[@"hint"];
+    modelWithBanner.messageId = dict[@"id"];
     return modelWithBanner;
 }
 

@@ -38,6 +38,8 @@
         [self addSubview:self.greetLab];
         [self addSubview:self.avatarBtn];
         
+        self.backgroundColor = [UIColor whiteColor];
+        
         //本视图的位置与大小不要跟据外部条件动态的更新，所以Masonry写在init中
        
         

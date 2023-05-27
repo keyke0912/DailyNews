@@ -14,13 +14,15 @@
 #import "BannerCollectionViewCell.h"
 #import "HeaderView.h"
 #import "BannerView.h"
+#import "DetailPageViewController.h"
 
 @interface ViewController () <
     UITableViewDelegate,
     UITableViewDataSource,
     UICollectionViewDelegate,
     UICollectionViewDataSource,
-    UICollectionViewDelegateFlowLayout
+    UICollectionViewDelegateFlowLayout,
+    UIScrollViewDelegate
     
 >
 
@@ -46,6 +48,10 @@
     [super viewDidLoad];
 //    _topview = [[MainPageCustomTopView alloc] init];
 //    [self.view addSubview:_topview];
+//    [self preferredStatusBarStyle];
+    self.navigationController.navigationBarHidden = YES;
+    self.view.backgroundColor = [UIColor whiteColor];
+    if (self.navigationController == nil) NSLog(@"11111111nilnilnilnilnil");
     
     [self.view addSubview:self.topView];
     [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -154,6 +160,22 @@
 //设置足够的tableview行高之后才能显现出image
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 100;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"select");
+    //UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self];
+    
+//    [[UINavigationController alloc] initWithRootViewController:ViewController];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    Model *dataModel  = self.moreDataArray[indexPath.section][indexPath.row];
+    DetailPageViewController *detailPageViewController = [[DetailPageViewController alloc]init];
+//    dvc.modalPresentationStyle = UIModalPresentationFullScreen;
+    detailPageViewController.url = [NSURL URLWithString:dataModel.urlStr];
+    detailPageViewController.dataUrl= [NSString stringWithFormat:@"https://news-at.zhihu.com/api/3/story-extra/%@",dataModel.messageId];
+    
+    [self.navigationController pushViewController:detailPageViewController animated:YES];
+    if (self.navigationController == nil) NSLog(@"nilnilnil");
+    
 }
 
 #pragma mark - <UICollectionViewDataSource>
@@ -298,6 +320,10 @@
         NSLog(@"table------EndDragging");
     }
 }
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
+}
+
 
 -(void)loadMoreData {
     NSLog(@"进入加载成功");
