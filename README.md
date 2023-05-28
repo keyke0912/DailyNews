@@ -1,7 +1,8 @@
 # DailyNews
 ## app简要介绍
 ### 主界面
-1.可顶部显示日期头像，不同时间段的问候语![Simulator Screenshot - iPhone 14 Pro - 2023-05-28 at 14 30 52](https://github.com/keyke0912/DailyNews/assets/120287767/bbe20c2a-2c54-4d81-bcfe-01c740ee1720)
+1.可顶部显示日期头像，不同时间段的问候语<img src="https://github.com/keyke0912/DailyNews/assets/120287767/bbe20c2a-2c54-4d81-bcfe-01c740ee1720" alt="Simulator Screenshot - iPhone 14 Pro" width="90" height="200">
+
 
 2.无限轮播图，可自由左右无限滑动，不滑动时自动轮播![181D892B-1E98-4AA6-849C-678446F4E380](https://github.com/keyke0912/DailyNews/assets/120287767/13b47dfe-2a03-4fde-bb9a-a6516c77a1b0)
 
