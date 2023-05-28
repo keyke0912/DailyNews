@@ -20,5 +20,69 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "84B816CD-F0E4-4A1A-9821-8AF2D6454596"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DailyNews/MainPage/VC/MainPageViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "92210FD7-082B-45FD-B922-709A0D0465B7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DailyNews/MainPage/VC/MainPageViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "377"
+            endingLineNumber = "377"
+            landmarkName = "-loadMoreData"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "92210FD7-082B-45FD-B922-709A0D0465B7 - b13d751d68a41570"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[MainPageViewController loadMoreData]"
+                  moduleName = "DailyNews"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/keyke/RedRock/Code/UI_OC/DailyNews/DailyNews/MainPage/VC/MainPageViewController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "365"
+                  endingLineNumber = "365"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "92210FD7-082B-45FD-B922-709A0D0465B7 - b13d751d68a41511"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[MainPageViewController loadMoreData]"
+                  moduleName = "DailyNews"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/keyke/RedRock/Code/UI_OC/DailyNews/DailyNews/MainPage/VC/MainPageViewController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "366"
+                  endingLineNumber = "366"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

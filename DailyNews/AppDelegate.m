@@ -6,7 +6,7 @@
 //
 
 #import "AppDelegate.h"
-#import "ViewController.h"
+#import "MainPageViewController.h"
 
 
 @interface AppDelegate ()
@@ -19,7 +19,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    ViewController *vc = [[ViewController alloc]init];
+    MainPageViewController *vc = [[MainPageViewController alloc]init];
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:vc];
 //    [navigationController.navigationBar setAlpha:0.0];

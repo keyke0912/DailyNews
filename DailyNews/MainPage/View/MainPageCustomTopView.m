@@ -15,7 +15,7 @@
 @property(nonatomic, strong)UILabel *monthLab;
 @property(nonatomic, strong)UIView *segmentationView;
 @property(nonatomic, strong)UILabel *greetLab;
-@property(nonatomic, strong)UIButton *avatarBtn;
+
 
 @end
 
@@ -174,7 +174,7 @@
 -(UIButton *)avatarBtn {
     if (_avatarBtn == nil) {
         _avatarBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        //[_avatarBtn setImage:[UIImage imageNamed:<#(nonnull NSString *)#>] forState:<#(UIControlState)#>]
+        [_avatarBtn setBackgroundImage:[UIImage imageNamed:@"headshot2"] forState:UIControlStateNormal];
         _avatarBtn.backgroundColor = [UIColor blueColor];
         
     }

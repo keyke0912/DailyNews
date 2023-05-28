@@ -36,15 +36,15 @@
         NSMutableArray *mArrayWithTableView = [NSMutableArray array];
         NSMutableArray *mArrayWithBanner = [NSMutableArray array];
         
-        Model *model;
+        
         
         for (NSDictionary *dict in responseObject[@"stories"]) {
-            model = [Model DataWithDictInTableView:dict];//临时model
+            Model *model = [Model DataWithDictInTableView:dict];//临时model
             model.dateStr = responseObject[@"date"];
             [mArrayWithTableView addObject:model];
         }
         for (NSDictionary *dict in responseObject[@"top_stories"]) {
-            model = [Model DataWithDictInBanner:dict];
+            Model *model = [Model DataWithDictInBanner:dict];
             model.dateStr = responseObject[@"date"];
             [mArrayWithBanner addObject:model];
         }
@@ -59,16 +59,16 @@
 + (void)getMoreDataWithSuccess:(void (^)(NSArray * _Nonnull))success Failure:(void (^)(void))failure Url:(NSString *)url {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager GET:url parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject ) {
-        
+        NSLog(@"成功进入more Data请求");
         NSMutableArray *mArrayWithMore = [NSMutableArray array];
-        Model *model;
         
         for (NSDictionary *dict in responseObject[@"stories"]) {
-            model = [Model DataWithDictInTableView:dict];
+            Model *model = [Model DataWithDictInTableView:dict];
             model.dateStr = responseObject[@"date"];
+            NSLog(@"model%@", model.dateStr);
             [mArrayWithMore addObject:model];
-            
-        } if (success) success(mArrayWithMore.copy);
+        }
+        if (success) success(mArrayWithMore.copy);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"failure11");
     }

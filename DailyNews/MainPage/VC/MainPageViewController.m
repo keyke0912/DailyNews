@@ -5,7 +5,7 @@
 //  Created by Key ke on 2023/4/21.
 //
 
-#import "ViewController.h"
+#import "MainPageViewController.h"
 #import "Model.h"
 #import "MainPageCustomTopView.h"
 #import "Masonry.h"
@@ -15,8 +15,9 @@
 #import "HeaderView.h"
 #import "BannerView.h"
 #import "DetailPageViewController.h"
+#import "LogingPageViewController.h"
 
-@interface ViewController () <
+@interface MainPageViewController () <
     UITableViewDelegate,
     UITableViewDataSource,
     UICollectionViewDelegate,
@@ -32,23 +33,23 @@
 @property (nonatomic, strong) NSMutableArray<NSArray *> *moreDataArray;
 @property (nonatomic, copy) NSString *pastNewsUrlStr;
 @property (nonatomic, copy) NSString *firstUrlStr;
-@property (nonatomic, assign) BOOL isLoading;
+@property (nonatomic, getter=isloading, assign) BOOL loading;
 @property (nonatomic, strong) MainPageCustomTopView *topView;
 @property (nonatomic, strong) HeaderView *headerView;
 @property (nonatomic, strong) BannerView *bannerView;
-@property (nonatomic, strong) NSTimer *bannerTimer;
 @property (nonatomic, assign) NSInteger currentPageIndex;
 
 
 @end
 
-@implementation ViewController
+@implementation MainPageViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    _topview = [[MainPageCustomTopView alloc] init];
 //    [self.view addSubview:_topview];
 //    [self preferredStatusBarStyle];
+    self.moreDataArray = [NSMutableArray array];
     self.navigationController.navigationBarHidden = YES;
     self.view.backgroundColor = [UIColor whiteColor];
     if (self.navigationController == nil) NSLog(@"11111111nilnilnilnilnil");
@@ -68,14 +69,15 @@
         
         self.bannerDataArray = [arrayWithBanner mutableCopy];
         [self.bannerDataArray addObject:arrayWithBanner[0]];
+        [self.bannerDataArray insertObject:arrayWithBanner[arrayWithBanner.count - 1] atIndex:0];
         
         NSLog(@"arrayWithBanner%@", arrayWithBanner);
         NSLog(@"bannerDataArray%@", self.bannerDataArray);
         
         self.tableViewDataArray = arrayWithTableView;
         [self.moreDataArray addObject:self.tableViewDataArray];
-        NSLog(@"222222%@", self.moreDataArray);
-        NSLog(@"%@", arrayWithTableView);
+        NSLog(@"moreDataArray%@", self.moreDataArray);
+        NSLog(@"arrayWithTableView%@", arrayWithTableView);
         [self.view addSubview:self.tableView];
         [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
             
@@ -124,6 +126,12 @@
     if (section == 0) {
         NSLog(@"bannerView请求");
         UIView *view = self.bannerView;
+//        // 获取第一个section的indexPath
+//        NSIndexPath *firstSectionIndexPath = [NSIndexPath indexPathForItem:1 inSection:0];
+//
+//        // 滚动到指定的indexPath，使其在屏幕上可见
+//        [self.bannerView.bannerCollectionView scrollToItemAtIndexPath:firstSectionIndexPath atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+
 //        [self startTimer];
         return view;
     } else {
@@ -174,6 +182,7 @@
     detailPageViewController.dataUrl= [NSString stringWithFormat:@"https://news-at.zhihu.com/api/3/story-extra/%@",dataModel.messageId];
     
     [self.navigationController pushViewController:detailPageViewController animated:YES];
+    
     if (self.navigationController == nil) NSLog(@"nilnilnil");
     
 }
@@ -198,6 +207,17 @@
     return self.bannerDataArray.count;
 }
 
+- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    Model *bannerModel = self.bannerDataArray[indexPath.item];
+    DetailPageViewController *detailPageViewController = [[DetailPageViewController alloc]init];
+    detailPageViewController.url = [NSURL URLWithString:bannerModel.urlStr];
+    detailPageViewController.dataUrl= [NSString stringWithFormat:@"https://news-at.zhihu.com/api/3/story-extra/%@",bannerModel.messageId];
+    
+    [self.navigationController pushViewController:detailPageViewController animated:YES];
+    
+    if (self.navigationController == nil) NSLog(@"nilnilnil");
+}
+
 #pragma mark - <UICollectionViewDelegateFlowLayout>
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -205,6 +225,12 @@
     return collectionView.frame.size;
 }
 
+- (void) avatarButtonClicked: (UIButton *)sender {
+    NSLog(@"avatar按钮被点击了！");
+    LogingPageViewController *logingPageViewController = [[LogingPageViewController alloc] init];
+    [self.navigationController pushViewController:logingPageViewController animated:YES];
+    
+}
 
 #pragma mark-Lazy
 - (UITableView *)tableView {
@@ -230,6 +256,7 @@
     if (_topView == nil) {
         
         _topView = [[MainPageCustomTopView alloc] init];
+        [_topView.avatarBtn addTarget:self action:@selector(avatarButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         
     }
     return _topView;
@@ -237,13 +264,14 @@
 
 - (BannerView *)bannerView {
     if (_bannerView == nil) {
+        self.currentPageIndex = 0;
         CGFloat width = self.view.frame.size.width;
-        NSLog(@"3333333333333    %f", width);
+//        NSLog(@"3333333333333    %f", width);
         _bannerView = [[BannerView alloc] initWithFrame:CGRectMake(0, 0, width, 393)];
         _bannerView.bannerCollectionView.delegate = self;
         _bannerView.bannerCollectionView.dataSource = self;
+
         [self startTimer];
-        self.currentPageIndex = 0;
         
     }
     return _bannerView;
@@ -261,18 +289,30 @@
 #pragma mark - <ScrollViewDelegate>
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if (scrollView == self.bannerView.bannerCollectionView) {
-            // 处理轮播图的滚动事件
-        //NSLog(@"bannerViewScoll");
+        // 计算当前页码
+        CGFloat pageWidth = scrollView.bounds.size.width;
+        NSInteger currentPage = (scrollView.contentOffset.x + pageWidth * 0.5) / pageWidth;
+            
+        // 根据实际的轮播图页面数量，进行取模运算，得到正确的页码
+        NSInteger totalPages = 5;
+        currentPage = currentPage % totalPages;
+            
+        // 更新bannerPageControl的当前页码
+        self.bannerView.bannerPageControl.currentPage = currentPage;
+        
     } else if (scrollView == self.tableView) {
         // 处理表格视图的滚动事件
-        NSLog(@"tableViewScoll");
+//        NSLog(@"tableViewScoll");
         CGFloat offsetY = scrollView.contentOffset.y;
         CGFloat contentHeight = scrollView.contentSize.height;
         CGFloat screenHeight = scrollView.frame.size.height;
-                
-        if (offsetY > contentHeight - screenHeight - 200) {
+            
+        if (self.isloading == YES) return;
+        
+        if (offsetY > contentHeight - screenHeight - 300) {
                 // 判断滚动到底部
             [self loadMoreData];
+            self.loading = YES;
             NSLog(@"加载方法调用成功");
         }
     }
@@ -284,33 +324,40 @@
             // 处理轮播图的滚动事件
         NSLog(@"scroll------BeginDragging");
         [self stopTimer];
-        NSInteger currentIndex = self.currentPageIndex;
-
-        // 计算下一个要显示的索引
-        NSInteger nextIndex = currentIndex + 1;
-        if (nextIndex >= self.bannerDataArray.count) {
-            nextIndex = 0;
-            NSIndexPath *firstIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
-            [self.bannerView.bannerCollectionView scrollToItemAtIndexPath:firstIndexPath atScrollPosition:UICollectionViewScrollPositionLeft animated:NO];
-                        
-        }
-
-        // 更新当前显示的索引
-        self.currentPageIndex = nextIndex;
+        
 
         // 更新页面控件的当前页
-        self.bannerView.bannerPageControl.currentPage = nextIndex;
+        //self.bannerView.bannerPageControl.currentPage = nextIndex;
     } else if (scrollView == self.tableView) {
             // 处理表格视图的滚动事件
         NSLog(@"table------BeginDragging");
     }
 }
+//当用户手指从滚动视图上离开，并且滚动视图停止滚动后，该方法会被触发
+- (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    // 处理轮播图的滚动事件
+    NSInteger currentPage = scrollView.contentOffset.x / CGRectGetWidth(scrollView.frame);
+    NSInteger totalPages = [self.bannerView.bannerCollectionView numberOfItemsInSection:0];
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (currentPage == 0) {
+    // 滚动到首位单元格时，跳转到倒数第二个单元格（最后一个实际单元格）
+        NSLog(@"滚动到首位单元格时，跳转到倒数第二个单元格（最后一个实际单元格）");
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:(totalPages - 2) inSection:0];
+        [self.bannerView.bannerCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
+    } else if (currentPage == (totalPages - 1)) {
+    // 滚动到末尾单元格时，跳转到第二个单元格（第一个实际单元格）
+        NSLog(@"滚动到末尾单元格时，跳转到第二个单元格（第一个实际单元格)");
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:1 inSection:0];
+        [self.bannerView.bannerCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
+    }
+}
+
+- (void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     if (scrollView == self.bannerView.bannerCollectionView) {
-            // 处理轮播图的滚动事件
+           
         ///[self startTimer];
         ///这样设置的话会有连续两下滑动的特别快，解决方法就是，添加一个判断；
+        
         if (_bannerTimer == nil)  {
             [self startTimer];
         }
@@ -328,18 +375,18 @@
 -(void)loadMoreData {
     NSLog(@"进入加载成功");
     Model *dataModel  = self.moreDataArray[self.moreDataArray.count-1][0];
-    NSLog(@"1111111%lu", self.moreDataArray.count-1);
-    NSLog(@"%@", self.moreDataArray);
-    self.pastNewsUrlStr = [NSString stringWithFormat:@"https://news-at.zhihu.com/api/3/stories/before/%@", [NSString stringWithFormat:@"%d",[dataModel.dateStr intValue]]];
-    NSLog(@"%@", dataModel.dateStr);
+
+    NSLog(@"请求前%@", self.moreDataArray);
+    self.pastNewsUrlStr = [NSString stringWithFormat:@"https://news-at.zhihu.com/api/3/stories/before/%@", dataModel.dateStr];
+    NSLog(@"请求前%@", dataModel.dateStr);
+    NSLog(@"pastNewsUrlStr%@", self.pastNewsUrlStr);
     [Model getMoreDataWithSuccess:^(NSArray * _Nonnull array) {
         NSLog(@"进入请求成功");
-        //self.tableViewDataArray = array;
         [self.moreDataArray addObject:array];
-        NSLog(@"loadmore\n\n\n\n");
-        NSLog(@"%@", dataModel.dateStr);
+        NSLog(@"请求后%@", self.moreDataArray);
+        //重新加载UITableView的数据并刷新显示。
         [self.tableView reloadData];
-        self.isLoading = NO;
+        self.loading = NO;
     } Failure:^{
             NSLog(@"请求失败");
         } Url:self.pastNewsUrlStr] ;
@@ -363,38 +410,28 @@
     self.bannerTimer = nil;
 }
 
-///在第六张图片加载后，停止timer直接无动画加载第一张实现衔接
-///索引小点点，要在第六张加载时切换到一个点
-///
+
 - (void)scrollToNextPage {
     if (_bannerTimer != nil) {
         NSLog(@"成功调用方法scrollToNextPage");
+        BOOL flag = YES;
         // 获取当前显示的索引
         NSInteger currentIndex = self.currentPageIndex;
 
         // 计算下一个要显示的索引
         NSInteger nextIndex = currentIndex + 1;
-        NSLog(@"55555555555%ld", (long)nextIndex);
-        if (nextIndex >= self.bannerDataArray.count) {
+        NSLog(@"nextIndex%ld", (long)nextIndex);
+        if (currentIndex == 5) {
             nextIndex = 0;
+            flag = NO;
+            [self stopTimer];
         }
-
+        NSIndexPath *nextIndexPath = [NSIndexPath indexPathForItem:nextIndex inSection:0];
+        [self.bannerView.bannerCollectionView scrollToItemAtIndexPath:nextIndexPath atScrollPosition:UICollectionViewScrollPositionNone animated:flag];
         // 更新当前显示的索引
         self.currentPageIndex = nextIndex;
-
-        if (nextIndex == 0) {
-            [self stopTimer];
-            NSIndexPath *firstIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
-            [self.bannerView.bannerCollectionView scrollToItemAtIndexPath:firstIndexPath atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
-            [self startTimer];
-        } else {
-            NSIndexPath *nextIndexPath = [NSIndexPath indexPathForItem:nextIndex inSection:0];
-            
-            [self.bannerView.bannerCollectionView scrollToItemAtIndexPath:nextIndexPath atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
-
-        }
-        
-        self.bannerView.bannerPageControl.currentPage = nextIndex;
+        NSLog(@"currentPageIndex%ld", (long)self.currentPageIndex);
+        if (flag == NO) [self startTimer];
 
     }
 }

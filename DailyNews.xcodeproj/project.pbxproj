@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AF6B691529F216780097B271 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF6B691429F216780097B271 /* AppDelegate.m */; };
-		AF6B691B29F216780097B271 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF6B691A29F216780097B271 /* ViewController.m */; };
+		AF6B691B29F216780097B271 /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF6B691A29F216780097B271 /* MainPageViewController.m */; };
 		AF6B692329F2167A0097B271 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF6B692129F2167A0097B271 /* LaunchScreen.storyboard */; };
 		AF6B692629F2167A0097B271 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AF6B692529F2167A0097B271 /* main.m */; };
 		AF6B692E29F225220097B271 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = AF6B692D29F225220097B271 /* Model.m */; };
@@ -21,6 +21,9 @@
 		AFBC089A2A208BEB00AFC4DE /* ExtraModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBC08972A208BEB00AFC4DE /* ExtraModel.m */; };
 		AFBC089B2A208BEB00AFC4DE /* ExtraView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBC08912A208BEB00AFC4DE /* ExtraView.m */; };
 		AFBC08A62A220AB200AFC4DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFBC08A52A220AB200AFC4DE /* Assets.xcassets */; };
+		AFBC08AD2A224FB000AFC4DE /* LogingPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBC08AC2A224FB000AFC4DE /* LogingPageView.m */; };
+		AFBC08B12A22590E00AFC4DE /* LogingPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBC08B02A22590E00AFC4DE /* LogingPageViewController.m */; };
+		AFBC08B32A225DE200AFC4DE /* LoginCredentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = AFBC08B22A225DE200AFC4DE /* LoginCredentials.plist */; };
 		DF399760779C2E890667B995 /* Pods_DailyNews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62E684AE8E18A3719819515E /* Pods_DailyNews.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,7 +34,7 @@
 		AF6B691029F216780097B271 /* DailyNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF6B691329F216780097B271 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AF6B691429F216780097B271 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		AF6B691A29F216780097B271 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		AF6B691A29F216780097B271 /* MainPageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainPageViewController.m; sourceTree = "<group>"; };
 		AF6B692229F2167A0097B271 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF6B692429F2167A0097B271 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF6B692529F2167A0097B271 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -47,7 +50,7 @@
 		AFBC086A2A1CF02F00AFC4DE /* HeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
 		AFBC086C2A1D254000AFC4DE /* BannerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BannerView.h; sourceTree = "<group>"; };
 		AFBC086D2A1D254000AFC4DE /* BannerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BannerView.m; sourceTree = "<group>"; };
-		AFBC08702A2083F500AFC4DE /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		AFBC08702A2083F500AFC4DE /* MainPageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainPageViewController.h; sourceTree = "<group>"; };
 		AFBC08912A208BEB00AFC4DE /* ExtraView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExtraView.m; sourceTree = "<group>"; };
 		AFBC08922A208BEB00AFC4DE /* ExtraView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExtraView.h; sourceTree = "<group>"; };
 		AFBC08942A208BEB00AFC4DE /* DetailPageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailPageViewController.h; sourceTree = "<group>"; };
@@ -55,6 +58,11 @@
 		AFBC08972A208BEB00AFC4DE /* ExtraModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExtraModel.m; sourceTree = "<group>"; };
 		AFBC08982A208BEB00AFC4DE /* ExtraModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExtraModel.h; sourceTree = "<group>"; };
 		AFBC08A52A220AB200AFC4DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AFBC08AB2A224FAF00AFC4DE /* LogingPageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LogingPageView.h; sourceTree = "<group>"; };
+		AFBC08AC2A224FB000AFC4DE /* LogingPageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LogingPageView.m; sourceTree = "<group>"; };
+		AFBC08AF2A22590E00AFC4DE /* LogingPageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LogingPageViewController.h; sourceTree = "<group>"; };
+		AFBC08B02A22590E00AFC4DE /* LogingPageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LogingPageViewController.m; sourceTree = "<group>"; };
+		AFBC08B22A225DE200AFC4DE /* LoginCredentials.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = LoginCredentials.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,10 +117,12 @@
 			children = (
 				AF6B691329F216780097B271 /* AppDelegate.h */,
 				AF6B691429F216780097B271 /* AppDelegate.m */,
+				AFBC08A72A2217E900AFC4DE /* LogingPage */,
 				AFBC08732A20880200AFC4DE /* MainPage */,
 				AFBC088F2A208BEA00AFC4DE /* DetailPage */,
 				AF6B692129F2167A0097B271 /* LaunchScreen.storyboard */,
 				AF6B692429F2167A0097B271 /* Info.plist */,
+				AFBC08B22A225DE200AFC4DE /* LoginCredentials.plist */,
 				AFBC08A52A220AB200AFC4DE /* Assets.xcassets */,
 				AF6B692529F2167A0097B271 /* main.m */,
 			);
@@ -131,8 +141,8 @@
 		AFA686E329F811B300AEDFF4 /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				AFBC08702A2083F500AFC4DE /* ViewController.h */,
-				AF6B691A29F216780097B271 /* ViewController.m */,
+				AFBC08702A2083F500AFC4DE /* MainPageViewController.h */,
+				AF6B691A29F216780097B271 /* MainPageViewController.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -201,6 +211,41 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		AFBC08A72A2217E900AFC4DE /* LogingPage */ = {
+			isa = PBXGroup;
+			children = (
+				AFBC08AA2A22186F00AFC4DE /* View */,
+				AFBC08A92A22186500AFC4DE /* VC */,
+				AFBC08A82A22180F00AFC4DE /* Model */,
+			);
+			path = LogingPage;
+			sourceTree = "<group>";
+		};
+		AFBC08A82A22180F00AFC4DE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AFBC08A92A22186500AFC4DE /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				AFBC08AF2A22590E00AFC4DE /* LogingPageViewController.h */,
+				AFBC08B02A22590E00AFC4DE /* LogingPageViewController.m */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		AFBC08AA2A22186F00AFC4DE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AFBC08AB2A224FAF00AFC4DE /* LogingPageView.h */,
+				AFBC08AC2A224FB000AFC4DE /* LogingPageView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -262,6 +307,7 @@
 			files = (
 				AFBC08A62A220AB200AFC4DE /* Assets.xcassets in Resources */,
 				AF6B692329F2167A0097B271 /* LaunchScreen.storyboard in Resources */,
+				AFBC08B32A225DE200AFC4DE /* LoginCredentials.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,7 +360,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF6B691B29F216780097B271 /* ViewController.m in Sources */,
+				AF6B691B29F216780097B271 /* MainPageViewController.m in Sources */,
 				AFBC086B2A1CF02F00AFC4DE /* HeaderView.m in Sources */,
 				AF6B691529F216780097B271 /* AppDelegate.m in Sources */,
 				AFBC089B2A208BEB00AFC4DE /* ExtraView.m in Sources */,
@@ -326,6 +372,8 @@
 				AFBC08992A208BEB00AFC4DE /* DetailPageViewController.m in Sources */,
 				AFBC086E2A1D254000AFC4DE /* BannerView.m in Sources */,
 				AF6B692E29F225220097B271 /* Model.m in Sources */,
+				AFBC08AD2A224FB000AFC4DE /* LogingPageView.m in Sources */,
+				AFBC08B12A22590E00AFC4DE /* LogingPageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
